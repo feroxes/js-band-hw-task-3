@@ -1,8 +1,7 @@
 // SCSS
 import './assets/style/main.scss';
 import './modules/handleFroms';
-import Ship from './modules/models/Ship';
-import Truck from './modules/models/Truck';
+import TransportFactory from './modules/models/TransportFactory';
 import Delivery from './modules/models/Devilery';
 import LocalStore from './modules/services/localStorage';
 
@@ -16,11 +15,34 @@ for (const key in localLists) {
     localLists[key].forEach((item) => {
       const list = [];
       if (key === 'ship') {
-        list.push(new Ship(item.id, item.model, item.producedYear, item.capacity, item.averageSpeed, item.serialNumber, item.countOfTeam));
+        const shipProps = {
+          id: item.id,
+          model: item.model,
+          producedYear: item.producedYear,
+          capacity: item.capacity,
+          averageSpeed: item.averageSpeed,
+          serialNumber: item.serialNumber,
+          countOfTeam: item.countOfTeam,
+        };
+        list.push(new TransportFactory('ship', shipProps));
       } else if (key === 'truck') {
-        list.push(new Truck(item.id, item.model, item.producedYear, item.capacity, item.averageSpeed, item.licensePlate, item.typeOfGas));
+        const truckProps = {
+          id: item.id,
+          model: item.model,
+          producedYear: item.producedYear,
+          capacity: item.capacity,
+          averageSpeed: item.averageSpeed,
+          licensePlate: item.licensePlate,
+          typeOfGas: item.typeOfGas,
+        };
+        list.push(new TransportFactory('truck', truckProps));
       } else {
-        list.push(new Delivery(item.transportModel, item.cargoCost, item.distanceCost));
+        const deliveryProps = {
+          transportModel: item.transportModel,
+          cargoCost: item.cargoCost,
+          distanceCost: item.distanceCost,
+        };
+        list.push(new Delivery(deliveryProps));
       }
       setList(key, list);
       renderList(key);
