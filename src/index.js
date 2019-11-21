@@ -4,15 +4,12 @@ import './modules/handleFroms';
 import Ship from './modules/models/Ship';
 import Truck from './modules/models/Truck';
 import Delivery from './modules/models/Devilery';
+import LocalStore from './modules/services/localStorage';
 
 import { setList } from './modules/lists';
 import { renderList } from './modules/renderList';
 
-const localLists = {
-  ship: JSON.parse(localStorage.getItem('shipList')),
-  truck: JSON.parse(localStorage.getItem('truckList')),
-  delivery: JSON.parse(localStorage.getItem('deliveryList')),
-};
+const localLists = LocalStore.getLocalList();
 
 for (const key in localLists) {
   if (localLists[key]) {
