@@ -1,10 +1,10 @@
 import Transport from './Transport';
 
 export default class Truck extends Transport {
-  constructor(id, model, producedYear, capacity, averageSpeed, licensePlate, typeOfGas) {
-    super(id, model, producedYear, capacity, averageSpeed, licensePlate, typeOfGas);
-    this.licensePlate = licensePlate;
-    this.typeOfGas = typeOfGas;
+  constructor(props) {
+    super(props);
+    this.licensePlate = props.licensePlate;
+    this.typeOfGas = props.typeOfGas;
   }
 
   set showAverageSpeed(value) {

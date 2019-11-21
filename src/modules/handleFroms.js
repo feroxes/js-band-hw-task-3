@@ -1,5 +1,4 @@
-import Ship from './models/Ship';
-import Truck from './models/Truck';
+import TransportFactory from './models/TransportFactory';
 import Delivery from './models/Devilery';
 
 import { shipList, truckList, deliveryList } from './lists';
@@ -41,17 +40,43 @@ const addNewList = (e) => {
   const speed = listName === 'ship' ? 'nm' : 'km';
 
   if (listName === 'ship') {
-    const ship = new Ship(data.id, data.model, data.producedYear, data.capacity, data.averageSpeed, data.serialNumber, data.countOfTeam);
+    const shipProps = {
+      id: data.id,
+      model: data.model,
+      producedYear: data.producedYear,
+      capacity: data.capacity,
+      averageSpeed: data.averageSpeed,
+      serialNumber: data.serialNumber,
+      countOfTeam: data.countOfTeam,
+    };
+    const ship = new TransportFactory('ship', shipProps);
+
     ship.showCapacityInPounds = 'pounds';
     ship.showAverageSpeed = speed;
     shipList.push(ship);
   } else if (listName === 'truck') {
-    const truck = new Truck(data.id, data.model, data.producedYear, data.capacity, data.averageSpeed, data.licensePlate, data.typeOfGas);
+    const truckProps = {
+      id: data.id,
+      model: data.model,
+      producedYear: data.producedYear,
+      capacity: data.capacity,
+      averageSpeed: data.averageSpeed,
+      licensePlate: data.licensePlate,
+      typeOfGas: data.typeOfGas,
+    };
+    const truck = new TransportFactory('truck', truckProps);
+
     truck.showCapacityInPounds = 'pounds';
     truck.showAverageSpeed = speed;
     truckList.push(truck);
   } else {
-    const delivery = new Delivery(data.transportModel, data.cargoCost, data.distanceCost);
+    const deliveryProps = {
+      transportModel: data.transportModel,
+      cargoCost: data.cargoCost,
+      distanceCost: data.distanceCost,
+    };
+    const delivery = new Delivery(deliveryProps);
+
     deliveryList.push(delivery);
   }
   clearForm(formInputs);

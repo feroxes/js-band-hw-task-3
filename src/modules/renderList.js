@@ -1,5 +1,5 @@
 import { shipList, truckList, deliveryList } from './lists';
-
+import LocalStore from './services/localStorage';
 
 const lists = {
   shipListElement: document.getElementById('ship_list'),
@@ -21,11 +21,6 @@ const removeChildren = (elem) => {
   elem.innerHTML = '';
 };
 
-const saveItemToStorage = (listName) => {
-  const list = lists[`${listName}List`];
-  localStorage.setItem(`${listName}List`, JSON.stringify(list));
-};
-
 export const renderList = (listName) => {
   const list = lists[`${listName}ListElement`];
   removeChildren(list);
@@ -35,5 +30,5 @@ export const renderList = (listName) => {
       createElement('li', { innerHTML: `${key} - ${item[key]}` }, listWrapper);
     }
   });
-  saveItemToStorage(listName);
+  LocalStore.saveItemToStorage(lists[`${listName}List`], listName);
 };
