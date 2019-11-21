@@ -1,4 +1,9 @@
 class LocalStorage {
+  constructor() {
+    if (!localStorage.getItem('JS-Band-token')) {
+      localStorage.setItem('JS-Band-token', '1234');
+    }
+  }
   getLocalList() {
     return {
       ship: JSON.parse(localStorage.getItem('shipList')),
